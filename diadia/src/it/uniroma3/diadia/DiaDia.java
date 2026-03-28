@@ -3,7 +3,6 @@ package it.uniroma3.diadia;
 
 import java.util.Scanner;
 
-import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
@@ -34,12 +33,10 @@ public class DiaDia {
 	static final private String[] elencoComandi = {"vai", "aiuto", "fine"};
 
 	private Partita partita;
-	private Labirinto labirinto;	//modificato
 	private Giocatore giocatore; //modificato
 
 	public DiaDia() {
 		this.partita = new Partita();
-		this.labirinto = this.partita.getLabirinto();		//modificato
 		this.giocatore = this.partita.getGiocatore();		//modificato
 	}
 
@@ -108,18 +105,18 @@ public class DiaDia {
 			return;
 		}
 		Stanza prossimaStanza = null;
-		prossimaStanza = this.labirinto.getStanzaCorrente().getStanzaAdiacente(direzione);		//modificato
+		prossimaStanza = this.partita.getStanzaCorrente().getStanzaAdiacente(direzione);		//modificato
 		if (prossimaStanza == null) {
 			System.out.println("");
 			System.out.println("Direzione inesistente");
 			System.out.println("");
 		}
 		else {
-			this.labirinto.setStanzaCorrente(prossimaStanza);		//modificato
+			this.partita.setStanzaCorrente(prossimaStanza);		//modificato
 			int cfu = this.giocatore.getCfu();			//modificato
 			this.giocatore.setCfu(--cfu);		//modificato
 		}
-		System.out.println(labirinto.getStanzaCorrente().getDescrizione());		//modificato
+		System.out.println(partita.getStanzaCorrente().getDescrizione());		//modificato
 	}
 
 	/**
