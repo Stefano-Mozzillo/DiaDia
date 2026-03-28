@@ -15,7 +15,7 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 public class Partita {
 
 	//static final private int CFU_INIZIALI = 20;		//inserito in giocatore
-
+	public Stanza stanzaCorrente;
 	private Labirinto labirinto;	//modificato
 	private Giocatore giocatore;
 	private boolean finita;
@@ -33,9 +33,7 @@ public class Partita {
 	 * @return vero se partita vinta
 	 */
 	public boolean vinta() {
-		//System.out.println("Stanza corrente: " + this.labirinto.getStanzaCorrente().getNome());
-	    //System.out.println("Stanza finale: " + this.labirinto.getStanzaFinale().getNome());
-		return this.labirinto.getStanzaCorrente()== this.labirinto.getStanzaFinale();		//modificato
+		return this.getStanzaCorrente()== this.labirinto.getStanzaFinale();		//modificato
 	}
 
 	/**
@@ -52,6 +50,14 @@ public class Partita {
 	 */
 	public void setFinita() {
 		this.finita = true;
+	}
+	
+	public void setStanzaCorrente(Stanza stanzaCorrente) {
+		this.stanzaCorrente = stanzaCorrente;
+	}
+
+	public Stanza getStanzaCorrente() {
+		return this.stanzaCorrente;
 	}
 	
 	/**
@@ -71,13 +77,4 @@ public class Partita {
 	public Giocatore getGiocatore() {	//aggiunto
 		return this.giocatore;
 	}
-	
-	//Inserite in Giocatore
-	/*public int getCfu() {
-		return this.cfu;
-	}
-
-	public void setCfu(int cfu) {
-		this.cfu = cfu;		
-	}	*/
 }
