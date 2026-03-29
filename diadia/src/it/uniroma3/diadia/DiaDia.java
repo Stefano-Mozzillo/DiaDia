@@ -4,6 +4,7 @@ package it.uniroma3.diadia;
 import java.util.Scanner;
 
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
 /**
@@ -65,6 +66,10 @@ public class DiaDia {
 			return true;
 		} else if (comandoDaEseguire.getNome().equals("vai"))
 			this.vai(comandoDaEseguire.getParametro());
+		else if (comandoDaEseguire.getNome().equals("posa"))
+			this.posaAttrezzo(comandoDaEseguire.getParametro());
+		else if (comandoDaEseguire.getNome().equals("prendi"))
+			this.prendiAttrezzo(comandoDaEseguire.getParametro());
 		else if (comandoDaEseguire.getNome().equals("aiuto"))
 			this.aiuto();
 		else
@@ -117,6 +122,70 @@ public class DiaDia {
 			this.giocatore.setCfu(--cfu);		//modificato
 		}
 		System.out.println(partita.getStanzaCorrente().getDescrizione());		//modificato
+	}
+	
+	/**
+	 * Prende un attrezzo dalla borsa e lo posa nella stanza corrente
+	 * Se la borsa è vuota non fa nulla, se l'attrezzo è presente in borsa invoca la funzione removeAttrezzo
+	 * e se è possibile aggiungerlo alla borsa lo aggiunge
+	 * @param nomeAttrezzo
+	 */
+	private void posaAttrezzo(String nomeAttrezzo) {
+		if (this.giocatore.getBorsa().isEmpty()) {
+			System.out.println("");
+			System.out.println("La borsa è vuota!");
+			System.out.println("");
+		}
+		else if (this.giocatore.getBorsa().hasAttrezzo(nomeAttrezzo)){
+			Attrezzo attrezzoPosato = this.giocatore.removeAttrezzo(nomeAttrezzo);
+			if (this.partita.getStanzaCorrente().addAttrezzo(attrezzoPosato)) {
+				System.out.println("");
+				System.out.println("Attrezzo posato!");
+				System.out.println(this.giocatore.getBorsa().toString());
+			}
+			else {
+				System.out.println("");
+				System.out.println("Non è possibile posare l'attrezzo");
+				System.out.println("");
+			}
+		}
+		else {
+			System.out.println("");
+			System.out.println("Attrezzo non presente in borsa!");
+			System.out.println("");
+		}
+	}
+	
+	/**
+	 * Prende un attrezzo dalla stanza e lo aggiunge alla borsa
+	 * Se l'attrezzo è presente nella stanza lo aggiunge alla borsa tramite addAttrezzo
+	 * e aumenta il peso della borsa
+	 * Se non è possibile aggiungerlo alla borsa lo riposa nella stanza 
+	 * @param nomeAttrezzo
+	 */
+	private void prendiAttrezzo(String nomeAttrezzo) {
+		Attrezzo attrezzo = this.partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo);
+		if (attrezzo!=null) {
+			if (this.giocatore.getBorsa().addAttrezzo(attrezzo)) {
+				this.giocatore.getBorsa().getPeso();
+				System.out.println("");
+				System.out.println("Attrezzo preso!");
+				System.out.println(this.giocatore.getBorsa().toString());
+			}
+			else {
+				this.partita.getStanzaCorrente().addAttrezzo(attrezzo);	//Per riaggiungerlo alla stanza se non è possibile inserirlo in borsa
+				System.out.println("");
+				System.out.println("Non è possibile recuperare l'attrezzo!");
+				System.out.println("");
+			}
+
+		}
+		else {
+			System.out.println("");
+			System.out.println("Attrezzo non presente nella stanza");
+			System.out.println("");
+		}
+		
 	}
 
 	/**

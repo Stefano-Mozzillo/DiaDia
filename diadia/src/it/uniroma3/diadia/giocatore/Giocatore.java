@@ -13,6 +13,7 @@ public class Giocatore {
 	
 	public Giocatore() {
 		this.cfu = CFU_INIZIALI;
+		this.borsa = new Borsa();
 	}
 	
 	public int getCfu() {
@@ -23,7 +24,15 @@ public class Giocatore {
 		this.cfu = cfu;		
 	}
 	
-	public boolean addAttrezzo(Attrezzo attrezzo) {
+	public boolean addAttrezzo(Attrezzo attrezzo) {		//Per passare la borsa corrente a DiaDia
 		return this.borsa.addAttrezzo(attrezzo);
+	}
+	
+	public Attrezzo removeAttrezzo(String nomeAttrezzo) {	//Per passare la borsa corrente a DiaDia
+		return this.borsa.removeAttrezzo(nomeAttrezzo);
+	}
+	
+	public Borsa getBorsa() {		//Prende la borsa corrente
+		return this.borsa;
 	}
 }
