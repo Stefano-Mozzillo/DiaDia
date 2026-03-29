@@ -167,7 +167,7 @@ public class DiaDia {
 		Attrezzo attrezzo = this.partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo);
 		if (attrezzo!=null) {
 			if (this.giocatore.getBorsa().addAttrezzo(attrezzo)) {
-				this.giocatore.getBorsa().getPeso();
+				this.giocatore.getBorsa().getPeso(); //inutile?
 				System.out.println("");
 				System.out.println("Attrezzo preso!");
 				System.out.println(this.giocatore.getBorsa().toString());
