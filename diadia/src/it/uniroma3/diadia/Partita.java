@@ -14,18 +14,16 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class Partita {
 
-	//static final private int CFU_INIZIALI = 20;		//inserito in giocatore
 	public Stanza stanzaCorrente;
 	private Labirinto labirinto;	//modificato
 	private Giocatore giocatore;
 	private boolean finita;
-	//private int cfu;		//inserito in giocatore
 	
 	public Partita(){
 		this.labirinto = new Labirinto();	//modificato
 		this.giocatore = new Giocatore();
+		stanzaCorrente = labirinto.getStanzaCorrente();
 		this.finita = false;
-		//this.cfu = CFU_INIZIALI;		//inserito in giocatore
 	}
 	
 	/**
@@ -34,6 +32,14 @@ public class Partita {
 	 */
 	public boolean vinta() {
 		return this.getStanzaCorrente()== this.labirinto.getStanzaFinale();		//modificato
+	}
+	
+	public void setStanzaCorrente(Stanza stanzaCorrente) {
+		this.stanzaCorrente = stanzaCorrente;
+	}
+
+	public Stanza getStanzaCorrente() {
+		return this.stanzaCorrente;
 	}
 
 	/**
@@ -51,15 +57,7 @@ public class Partita {
 	public void setFinita() {
 		this.finita = true;
 	}
-	
-	public void setStanzaCorrente(Stanza stanzaCorrente) {
-		this.stanzaCorrente = stanzaCorrente;
-	}
-
-	public Stanza getStanzaCorrente() {
-		return this.stanzaCorrente;
-	}
-	
+		
 	/**
 	 * Restituisce il labirinto della classe partita alla classe DiaDia
 	 * Per avere un solo labirinto
