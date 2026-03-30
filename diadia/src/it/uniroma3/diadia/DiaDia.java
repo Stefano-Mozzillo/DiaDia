@@ -31,7 +31,7 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 	
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine"};
+	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "posa", "prendi"};
 
 	private Partita partita;
 	private Giocatore giocatore; //modificato
@@ -131,6 +131,10 @@ public class DiaDia {
 	 * @param nomeAttrezzo
 	 */
 	private void posaAttrezzo(String nomeAttrezzo) {
+		if (nomeAttrezzo == null) {
+			System.out.println("Che attrezzo vuoi posare?");
+			return;
+		}
 		if (this.giocatore.getBorsa().isEmpty()) {
 			System.out.println("");
 			System.out.println("La borsa è vuota!");
@@ -164,6 +168,10 @@ public class DiaDia {
 	 * @param nomeAttrezzo
 	 */
 	private void prendiAttrezzo(String nomeAttrezzo) {
+		if (nomeAttrezzo == null) {
+			System.out.println("Che attrezzo vuoi prendere?");
+			return;
+		}
 		Attrezzo attrezzo = this.partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo);
 		if (attrezzo!=null) {
 			if (this.giocatore.getBorsa().addAttrezzo(attrezzo)) {
