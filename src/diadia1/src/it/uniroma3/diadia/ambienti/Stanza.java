@@ -142,8 +142,8 @@ public class Stanza {
 	public boolean hasAttrezzo(String nomeAttrezzo) {
 		boolean trovato;
 		trovato = false;
-		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo.getNome().equals(nomeAttrezzo))
+		for (int i=0;i<this.numeroAttrezzi;i++) {
+			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
 				trovato = true;
 		}
 		return trovato;
@@ -158,9 +158,9 @@ public class Stanza {
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		Attrezzo attrezzoCercato;
 		attrezzoCercato = null;
-		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo!=null && attrezzo.getNome().equals(nomeAttrezzo))//bisogna aggiungere il controllo attrezzo!=NULL altrimenti null pointer exception!!!!
-				attrezzoCercato = attrezzo;
+		for (int i=0;i<this.numeroAttrezzi;i++) {
+			if (this.attrezzi[i].getNome().equals(nomeAttrezzo))//bisogna aggiungere il controllo attrezzo!=NULL altrimenti null pointer exception!!!!
+				attrezzoCercato = attrezzi[i];
 		}
 		return attrezzoCercato;	
 	}//attenzione al null pointer exception quando si usa equal!
@@ -171,7 +171,13 @@ public class Stanza {
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
 	public boolean removeAttrezzo(Attrezzo attrezzo) {
-		// TODO da implementare
+		for (int i=0; i<this.numeroAttrezzi; i++) {
+			if (this.attrezzi[i].getNome().equals(attrezzo.getNome())) {
+				this.attrezzi[i]=this.attrezzi[this.numeroAttrezzi-1];
+				this.numeroAttrezzi=this.numeroAttrezzi-1;
+				return true;
+			}
+		}
 		return false;
 	}
 

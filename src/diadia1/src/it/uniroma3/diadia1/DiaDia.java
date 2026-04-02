@@ -2,8 +2,9 @@ package it.uniroma3.diadia1;
 
 
 import java.util.Scanner;
-
+import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.giocatore.Giocatore;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -29,14 +30,14 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 	
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine"};
+	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "posa", "prendi"};
 
 	private Partita partita;
-	
+	private Giocatore giocatore;
 
 	public DiaDia() {
 		this.partita = new Partita();
-		
+		this.giocatore = this.partita.getGiocatore();
 	}
 
 	public void gioca() {
@@ -66,17 +67,26 @@ public class DiaDia {
 			this.vai(comandoDaEseguire.getParametro());
 		else if (comandoDaEseguire.getNome().equals("aiuto"))
 			this.aiuto();
+		else if (comandoDaEseguire.getNome().equals("posa"))
+			this.posaAttrezzo(comandoDaEseguire.getParametro());
+		else if (comandoDaEseguire.getNome().equals("prendi"))
+			this.prendiAttrezzo(comandoDaEseguire.getParametro());
 		else
 			System.out.println("Comando sconosciuto");
 		if (this.partita.vinta()) {
 			System.out.println("Hai vinto!");
+			return true;}
+		else if (this.partita.isFinita()){
+			System.out.println("");
+			System.out.println("Hai perso! Hai finito i cfu.");
+			System.out.println("Grazie per aver giocato");
 			return true;
-		} else
+			}	
+		else
 			return false;
 	}   
 
 	// implementazioni dei comandi dell'utente:
-
 	/**
 	 * Stampa informazioni di aiuto.
 	 */
@@ -100,11 +110,73 @@ public class DiaDia {
 		    return;}
 		else {
 			this.partita.setStanzaCorrente(prossimaStanza);
-			this.partita.decrementaCfu();
+			this.giocatore.decrementaCFU();
 			; //CORREZIONE: in java cfu-- restituisce 20, decrementando la variabile locale
 		}                               //settando a 20 i cfu.
 		System.out.println(partita.getStanzaCorrente().getDescrizione());
 	}
+	
+	private void posaAttrezzo(String nomeAttrezzo) {
+		if (nomeAttrezzo == null) {
+			System.out.println("Che attrezzo vuoi posare?");
+			return;
+		}
+		if (this.giocatore.getBorsa().isEmpty()) {
+			System.out.println("");
+			System.out.println("La borsa è vuota!");
+			System.out.println("");
+		}
+		else if (this.giocatore.getBorsa().hasAttrezzo(nomeAttrezzo)){
+			Attrezzo attrezzoPosato = this.giocatore.removeAttrezzo(nomeAttrezzo);
+			if (this.partita.getStanzaCorrente().addAttrezzo(attrezzoPosato)) {
+				System.out.println("");
+				System.out.println("Attrezzo posato!");
+				System.out.println(this.giocatore.getBorsa().toString());
+			}
+			else {
+				System.out.println("");
+				System.out.println("Non è possibile posare l'attrezzo, la stanza è piena!");
+				System.out.println("");
+			}
+		}
+		else {
+			System.out.println("");
+			System.out.println("Attrezzo non presente in borsa!");
+			System.out.println("");
+		}
+	
+	
+		}
+	
+	
+	private void prendiAttrezzo(String nomeAttrezzo) {
+		if (nomeAttrezzo == null) {
+			System.out.println("Che attrezzo vuoi prendere?");
+			return;
+		}
+		Attrezzo attrezzo = this.partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo);
+		if (attrezzo!=null) {
+			if (this.giocatore.getBorsa().addAttrezzo(attrezzo)) {
+				System.out.println("");
+				System.out.println("Attrezzo preso!");
+				System.out.println(this.giocatore.getBorsa().toString());
+			}
+			else {
+				this.partita.getStanzaCorrente().addAttrezzo(attrezzo);	//Per riaggiungerlo alla stanza se non è possibile inserirlo in borsa
+				System.out.println("");
+				System.out.println("Non è possibile recuperare l'attrezzo!");
+				System.out.println("");
+			}
+
+		}
+		else {
+			System.out.println("");
+			System.out.println("Attrezzo non presente nella stanza");
+			System.out.println("");
+		}
+		
+	}
+
 
 	/**
 	 * Comando "Fine".
