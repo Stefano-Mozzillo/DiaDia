@@ -4,7 +4,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Giocatore {
 	private int cfu;
-	static final private int CFU_INIZIALI = 3;
+	static final private int CFU_INIZIALI = 20;
 	private Borsa borsa;
 	public Giocatore() {
 		this.cfu = CFU_INIZIALI;
@@ -24,9 +24,13 @@ public class Giocatore {
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		return this.borsa.addAttrezzo(attrezzo);
 	}
-	/*public  Attrezzo removeAttrezzo(String attrezzo) {
-		return this.borsa.removeAttrezzo(attrezzo);
-	}*/
+	public Attrezzo removeAttrezzo(String nomeAttrezzo) {	//Per passare la borsa corrente a DiaDia
+		return this.borsa.removeAttrezzo(nomeAttrezzo);
+	}
+	
+	public Borsa getBorsa() {		//Prende la borsa corrente
+		return this.borsa;
+	}
 }
 
 

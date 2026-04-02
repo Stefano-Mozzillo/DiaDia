@@ -32,7 +32,10 @@ public class Partita {
 
 
 
-	
+	public Giocatore getGiocatore() {	
+		return this.giocatore;
+	}
+
 
 	public void setStanzaCorrente(Stanza stanzaCorrente) {
 		this.stanzaCorrente = stanzaCorrente;
@@ -63,9 +66,6 @@ public class Partita {
 	 */
 	public void setFinita() {
 		this.finita = true;
-	}
-	public void decrementaCfu(){
-		this.giocatore.decrementaCFU();
 	}
 }
 
