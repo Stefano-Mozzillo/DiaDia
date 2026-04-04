@@ -50,7 +50,6 @@ public class Stanza {
     public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
         boolean aggiornato = false;
     	for(int i=0; i<this.direzioni.length; i++)
-        	//if (this.direzioni[i] != null && this.direzioni[i].equals(direzione)) {
     		if(direzione.equals(this.direzioni[i])) {
         		this.stanzeAdiacenti[i] = stanza;
         		aggiornato = true;

@@ -20,12 +20,9 @@ public class Comando {
     private String nome;
     private String parametro;
 
-    public Comando(String istruzione) {		//modificata
-		
-		if(istruzione==null)		//modificato
-			System.out.println("Comando sconosciuto");
-		
-		try(Scanner scannerDiParole = new Scanner(istruzione)){		//modificato
+    public Comando(String istruzione) {
+    	
+		try(Scanner scannerDiParole = new Scanner(istruzione)){
 			// prima parola: nome del comando
 			if (scannerDiParole.hasNext())
 				this.nome = scannerDiParole.next(); 
