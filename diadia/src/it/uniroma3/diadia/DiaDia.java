@@ -44,14 +44,12 @@ public class DiaDia {
 	}
 
 	public void gioca() {
+		String istruzione;
 		this.console.mostraMessaggio(MESSAGGIO_BENVENUTO);
+		do
+			istruzione = this.console.leggiRiga();
+		while (!processaIstruzione(istruzione));
 		
-		try(Scanner scannerDiLinee = new Scanner(System.in)){	
-			String istruzione; 
-			do		
-				istruzione = scannerDiLinee.nextLine();
-			while (!processaIstruzione(istruzione));
-		}
 	}   
 
 
