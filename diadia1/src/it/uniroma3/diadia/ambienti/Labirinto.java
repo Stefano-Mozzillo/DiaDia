@@ -24,11 +24,12 @@ public class Labirinto {
 		/* crea gli attrezzi */
     	Attrezzo lanterna = new Attrezzo("lanterna",3);
 		Attrezzo osso = new Attrezzo("osso",1);
+		Attrezzo passepartout = new Attrezzo("passepartout",1);
     	
 		/* crea stanze del labirinto */
-		Stanza atrio = new Stanza("Atrio");
-		Stanza aulaN11 = new Stanza("Aula N11");
-		Stanza aulaN10 = new Stanza("Aula N10");
+		Stanza atrio = new StanzaBuia("Atrio");
+		Stanza aulaN11 = new StanzaMagica("Aula N11");
+		Stanza aulaN10 = new StanzaBloccata("Aula N10", "nord", "passepartout");
 		Stanza laboratorio = new Stanza("Laboratorio Campus");
 		Stanza biblioteca = new Stanza("Biblioteca");
 		Stanza bar = new Stanza("Bar");
@@ -51,6 +52,7 @@ public class Labirinto {
 
         /* pone gli attrezzi nelle stanze */
 		aulaN10.addAttrezzo(lanterna);
+		aulaN10.addAttrezzo(passepartout);
 		atrio.addAttrezzo(osso);
 
 		// la stanza vincente del labirinto è biblioteca 
@@ -69,3 +71,4 @@ public class Labirinto {
 	
 
 }
+
