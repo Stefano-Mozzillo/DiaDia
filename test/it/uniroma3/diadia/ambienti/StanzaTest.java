@@ -88,25 +88,25 @@ private Attrezzo martello;
 //impostaStanzaAdiacente   e getStanzaAdiacente 
     @Test
 	void testImpostaStanzaAdiacenteNordCorrettamente() {
-		stanza.impostaStanzaAdiacente("nord", stanzaAdiacente);
-		assertEquals(stanzaAdiacente,stanza.getStanzaAdiacente("nord"), "inserita stanza nord");
+		stanza.impostaStanzaAdiacente(Direzione.NORD, stanzaAdiacente);
+		assertEquals(stanzaAdiacente,stanza.getStanzaAdiacente(Direzione.NORD), "inserita stanza nord");
 	}
 	@Test
 	void testImpostaStanzaAdiacenteSudCorrettamente() {
-		stanza.impostaStanzaAdiacente("sud",stanzaAdiacente);
-		assertEquals(stanzaAdiacente,stanza.getStanzaAdiacente("sud"));
+		stanza.impostaStanzaAdiacente(Direzione.SUD,stanzaAdiacente);
+		assertEquals(stanzaAdiacente,stanza.getStanzaAdiacente(Direzione.SUD));
 	}
 	
 	@Test
 	void testImpostaStanzaAdiacenteEstCorrettamente() {
-		stanza.impostaStanzaAdiacente("est",stanzaAdiacente);
-		assertEquals(stanzaAdiacente,stanza.getStanzaAdiacente("est"));
+		stanza.impostaStanzaAdiacente(Direzione.EST,stanzaAdiacente);
+		assertEquals(stanzaAdiacente,stanza.getStanzaAdiacente(Direzione.EST));
 	}
 	
 	@Test
 	void testImpostaStanzaAdiacenteOvestCorrettamente() {
-		stanza.impostaStanzaAdiacente("ovest",stanzaAdiacente);
-		assertEquals(stanzaAdiacente,stanza.getStanzaAdiacente("ovest"));
+		stanza.impostaStanzaAdiacente(Direzione.OVEST,stanzaAdiacente);
+		assertEquals(stanzaAdiacente,stanza.getStanzaAdiacente(Direzione.OVEST));
 	}
 	
 	
@@ -114,14 +114,14 @@ private Attrezzo martello;
 	@Test
 	void aggiornaDirezioneGiàEsistente() {
 	    Stanza nuovaStanza = new Stanza("nuova");
-	    stanza.impostaStanzaAdiacente("nord", stanzaAdiacente);
-	    stanza.impostaStanzaAdiacente("nord", nuovaStanza);  // sovrascrive
-	    assertEquals(nuovaStanza, stanza.getStanzaAdiacente("nord"));
+	    stanza.impostaStanzaAdiacente(Direzione.NORD, stanzaAdiacente);
+	    stanza.impostaStanzaAdiacente(Direzione.NORD, nuovaStanza);  // sovrascrive
+	    assertEquals(nuovaStanza, stanza.getStanzaAdiacente(Direzione.NORD));
 	}
 	
 	@Test
 	void direzioneInesistente() {
-	    assertNull(stanza.getStanzaAdiacente("nord")); //stanza non ha stanze adiacenti
+	    assertNull(stanza.getStanzaAdiacente(Direzione.NORD)); //stanza non ha stanze adiacenti
 	}
 
 }

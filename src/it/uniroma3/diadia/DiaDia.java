@@ -3,6 +3,8 @@ package it.uniroma3.diadia;
 
 
 
+import java.util.Scanner;
+
 import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.comando.AbstractComando;
@@ -82,7 +84,8 @@ public class DiaDia {
 	
 
 	public static void main(String[] argc) {
-		IO io = new IOConsole();
+		try (Scanner scannerDiLinee = new Scanner(System.in)) {
+		IO io = new IOConsole(scannerDiLinee);
 		
 		
 		Labirinto labirinto = Labirinto.newBuilder()
@@ -119,4 +122,4 @@ public class DiaDia {
 	}
 }
 
-
+}

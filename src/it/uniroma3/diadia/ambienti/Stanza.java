@@ -29,6 +29,7 @@ public class Stanza {
 	
 	private AbstractPersonaggio personaggio;
 
+	private int numeroMaxAttrezzi; 
 	
 
 	/**
@@ -39,6 +40,7 @@ public class Stanza {
 		this.nome = nome;
 		this.attrezzi = new HashMap<>();
 		this.stanzeAdiacenti = new HashMap<>() ;
+		this.numeroMaxAttrezzi=10;
 		
 	}
 
@@ -98,7 +100,7 @@ public class Stanza {
 	 * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-	if(attrezzo==null || this.attrezzi.containsKey(attrezzo.getNome()))
+	if(attrezzo==null || this.attrezzi.containsKey(attrezzo.getNome()) ||this.getNumeroAttrezzi()>numeroMaxAttrezzi)
 		return false;
 	else
 		this.attrezzi.put(attrezzo.getNome(), attrezzo);
