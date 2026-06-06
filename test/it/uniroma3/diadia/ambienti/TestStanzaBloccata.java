@@ -16,9 +16,9 @@ private String descrizioneSenzaPassepartout;
 
 	@BeforeEach
 	void SetUp() {
-	stanzaNordBloccato= new StanzaBloccata("iniziale","nord","passepartout");
+	stanzaNordBloccato= new StanzaBloccata("iniziale",Direzione.NORD,"passepartout");
 	nord= new Stanza ("nord");
-	stanzaNordBloccato.impostaStanzaAdiacente("nord", nord);
+	stanzaNordBloccato.impostaStanzaAdiacente(Direzione.NORD, nord);
 	passepartout= new Attrezzo("passepartout", 1);
 	descrizioneSenzaPassepartout=stanzaNordBloccato.getDescrizione();
 	}
@@ -27,9 +27,9 @@ private String descrizioneSenzaPassepartout;
 	@Test
 	void testStanzaAdiacenteBloccataSenzaPasspartoutInStanzaCorrente_SbloccataConPassepartout() {
 		assertFalse(stanzaNordBloccato.hasAttrezzo("passepartout"));
-		assertNull(stanzaNordBloccato.getStanzaAdiacente("nord"));
+		assertNull(stanzaNordBloccato.getStanzaAdiacente(Direzione.NORD));
 		assertTrue(stanzaNordBloccato.addAttrezzo(passepartout));
-		assertEquals(stanzaNordBloccato.getStanzaAdiacente("nord"), nord);
+		assertEquals(stanzaNordBloccato.getStanzaAdiacente(Direzione.NORD), nord);
 	
 	}
 	@Test
@@ -44,14 +44,14 @@ private String descrizioneSenzaPassepartout;
 	void testStanzaBloccata_diversaDaStanzaAdiacenteSceltaDaUtente() {
 		assertFalse(stanzaNordBloccato.hasAttrezzo("passepartout"));
 		Stanza est= new Stanza("est");
-		stanzaNordBloccato.impostaStanzaAdiacente("est",est);
-		assertEquals(stanzaNordBloccato.getStanzaAdiacente("est"), est);}
+		stanzaNordBloccato.impostaStanzaAdiacente(Direzione.EST,est);
+		assertEquals(stanzaNordBloccato.getStanzaAdiacente(Direzione.EST), est);}
 	
 	@Test
 	void oggettoDiversoDaPassepartoutNonSbloccaLaStanza(){
 		assertFalse(stanzaNordBloccato.hasAttrezzo("passepartout"));
 		assertTrue(stanzaNordBloccato.addAttrezzo(new Attrezzo("martello",3)));
-		assertNull(stanzaNordBloccato.getStanzaAdiacente("nord"));}
+		assertNull(stanzaNordBloccato.getStanzaAdiacente(Direzione.NORD));}
 	
 	
 

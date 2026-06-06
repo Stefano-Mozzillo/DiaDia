@@ -32,7 +32,7 @@ class TestStanzaBuia {
 	}	
 	@Test
 	void testDescrizioneStanzaConVicini() {
-		stanzaBuia.impostaStanzaAdiacente("nord", nord);
+		stanzaBuia.impostaStanzaAdiacente(Direzione.NORD, nord);
 		assertFalse(stanzaBuia.hasAttrezzo("lanterna"));
 		assertEquals(descrizioneSenzaLanterna, stanzaBuia.getDescrizione());
 		assertTrue(stanzaBuia.addAttrezzo(lanterna));
@@ -40,7 +40,7 @@ class TestStanzaBuia {
 	}	
 	@Test
 	void testDescrizioneStanzaConAttrezzoDiversoDaLanterna() {
-		stanzaBuia.impostaStanzaAdiacente("nord", nord);
+		stanzaBuia.impostaStanzaAdiacente(Direzione.NORD, nord);
 		assertTrue(stanzaBuia.addAttrezzo(new Attrezzo("martello",1)));
 		assertFalse(stanzaBuia.hasAttrezzo("lanterna"));
 		assertEquals(descrizioneSenzaLanterna, stanzaBuia.getDescrizione());

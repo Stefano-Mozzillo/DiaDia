@@ -26,4 +26,6 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 		comando.setParametro(parametro);
 		return comando;
 	}
+
+	
 }

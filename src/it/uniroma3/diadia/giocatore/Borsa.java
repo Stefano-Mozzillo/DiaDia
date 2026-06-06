@@ -15,8 +15,8 @@ import it.uniroma3.diadia.Impostazioni;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Borsa {
-	
-	
+
+
 	private List<Attrezzo> attrezzi;
 	private int pesoMax;
 	public Borsa() {
@@ -24,7 +24,7 @@ public class Borsa {
 		this.pesoMax = imp.getPesoMaxBorsa();
 		this.attrezzi = new ArrayList<>();
 	}
-	
+
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
 			return false;
@@ -97,7 +97,7 @@ public class Borsa {
 		inOrdine.addAll(this.attrezzi);
 		return inOrdine;
 	}
-	
+
 	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
 		Map<Integer,Set<Attrezzo>> mappa = new HashMap<>();
 		Set<Attrezzo> tmp;
@@ -105,7 +105,7 @@ public class Borsa {
 			tmp=mappa.get(attrezzo.getPeso());
 
 			if(tmp==null) {
-				
+
 				tmp=new HashSet<>();
 				mappa.put(attrezzo.getPeso(), tmp);}
 			tmp.add(attrezzo);
@@ -114,6 +114,22 @@ public class Borsa {
 		return mappa;
 	}
 
+	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso2(){
+		Map<Integer,Set<Attrezzo>> mappa = new HashMap<>();
+		Set<Attrezzo> tmp;
+		for(Attrezzo attrezzo:this.attrezzi) {
+			if(mappa.containsKey(attrezzo.getPeso())) {
+				tmp=mappa.get(attrezzo.getPeso());
+				tmp.add(attrezzo);}
+			else {
+				tmp= new HashSet<>();
+				tmp.add(attrezzo);
+				mappa.put(attrezzo.getPeso(), tmp);
+			}
+		}
+		return mappa;
+
+	}
 	public String guardaOrdinatoPerPeso() {
 		StringBuilder s = new StringBuilder();
 
@@ -141,21 +157,21 @@ public class Borsa {
 			s.append("Borsa vuota");
 		return s.toString();
 	}
-	
-//	public String guardaOrdinatoPerNome() {
-//		StringBuilder s = new StringBuilder();
-//
-//		if (!this.isEmpty()) {
-//			s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg): ");
-//		
-//			for(Attrezzo a: getContenutoOrdinatoPerNome()) {
-//				s.append(a + " ");
-//			}
-//		}
-//		else
-//			s.append("Borsa vuota");
-//		return s.toString();
-//	}
+
+	//	public String guardaOrdinatoPerNome() {
+	//		StringBuilder s = new StringBuilder();
+	//
+	//		if (!this.isEmpty()) {
+	//			s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg): ");
+	//		
+	//			for(Attrezzo a: getContenutoOrdinatoPerNome()) {
+	//				s.append(a + " ");
+	//			}
+	//		}
+	//		else
+	//			s.append("Borsa vuota");
+	//		return s.toString();
+	//	}
 
 
 
